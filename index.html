@@ -1,11 +1,9 @@
-<!-- Paste this into your index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Pick a Chest!</title>
   <style>
-    /* [CSS unchanged from your original] */
     body {
       background-color: #111;
       font-family: 'Trebuchet MS', sans-serif;
@@ -153,7 +151,6 @@
       chest.appendChild(result);
     }
 
-    // 🧠 New function to open chest by coordinate (e.g., "C3")
     function getIndexFromCoord(coord) {
       const rows = ['A', 'B', 'C', 'D', 'E'];
       const cols = ['1', '2', '3', '4', '5'];
@@ -169,7 +166,5 @@
       if (chest) revealChest(chest, index);
     };
 
-    startNewGame();
-  </script>
-</body>
-</html>
+    // 🧠 Listener for external commands (via fetch)
+    window.add
