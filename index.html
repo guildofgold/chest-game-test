@@ -1,11 +1,9 @@
-<!-- Paste this into your index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Pick a Chest!</title>
   <style>
-    /* [CSS unchanged from your original] */
     body {
       background-color: #111;
       font-family: 'Trebuchet MS', sans-serif;
@@ -134,42 +132,4 @@
       for (let i = 0; i < gridSize; i++) {
         const chest = document.createElement('div');
         chest.className = 'chest';
-        chest.onclick = () => revealChest(chest, i);
-        grid.appendChild(chest);
-      }
-    }
-
-    function revealChest(chest, index) {
-      if (chest.classList.contains('opened')) return;
-      chest.classList.add('opened');
-      const result = document.createElement('div');
-      result.className = 'result';
-      if (index === prizeIndex) {
-        result.textContent = 'Winner!';
-      } else {
-        result.textContent = 'No Win';
-        result.classList.add('fail');
-      }
-      chest.appendChild(result);
-    }
-
-    // 🧠 New function to open chest by coordinate (e.g., "C3")
-    function getIndexFromCoord(coord) {
-      const rows = ['A', 'B', 'C', 'D', 'E'];
-      const cols = ['1', '2', '3', '4', '5'];
-      const row = rows.indexOf(coord[0].toUpperCase());
-      const col = cols.indexOf(coord[1]);
-      return row * 5 + col;
-    }
-
-    window.openChestByCoord = function(coord) {
-      const index = getIndexFromCoord(coord);
-      const grid = document.getElementById('grid');
-      const chest = grid.children[index];
-      if (chest) revealChest(chest, index);
-    };
-
-    startNewGame();
-  </script>
-</body>
-</html>
+        chest.onclick = () => revealChest
