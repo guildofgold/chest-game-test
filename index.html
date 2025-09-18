@@ -149,3 +149,15 @@
         result.classList.add('fail');
       }
       chest.appendChild(result);
+    }
+
+    function getIndexFromCoord(coord) {
+      const rows = ['A', 'B', 'C', 'D', 'E'];
+      const cols = ['1', '2', '3', '4', '5'];
+      const row = rows.indexOf(coord[0].toUpperCase());
+      const col = cols.indexOf(coord[1]);
+      return row * 5 + col;
+    }
+
+    window.openChestByCoord = function(coord) {
+      const index = getIndexFromCoord
