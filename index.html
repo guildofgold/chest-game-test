@@ -161,4 +161,23 @@
 
     window.openChestByCoord = function(coord) {
       const index = getIndexFromCoord(coord);
-      const
+      const grid = document.getElementById('grid');
+      const chest = grid.children[index];
+      if (chest) revealChest(chest, index);
+    };
+
+    // ✅ External trigger support via window.postMessage
+    window.addEventListener('message', (event) => {
+      if (!event.data || typeof event.data !== 'string') return;
+      const [command, value] = event.data.split(':');
+      if (command === 'open' && value) {
+        openChestByCoord(value.trim());
+      } else if (command === 'start') {
+        startNewGame();
+      }
+    });
+
+    startNewGame();
+  </script>
+</body>
+</html>
