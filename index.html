@@ -177,6 +177,8 @@
                     if (!isNaN(index)) {
                         openChestByIndex(index);
                     }
+                } else if (message.command === 'start_game') {
+                    startGame();
                 }
             };
 
