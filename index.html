@@ -146,4 +146,55 @@
             if (index === prizeIndex) {
                 result.textContent = 'Winner!';
             } else {
-                result.textContent =
+                result.textContent = 'No Win';
+                result.classList.add('fail');
+            }
+            chest.appendChild(result);
+        }
+
+        function openChestByIndex(index) {
+            const chest = document.getElementById('grid').children[index];
+            if (chest) {
+                revealChest(chest, index);
+            } else {
+                console.error(`Chest with index ${index} does not exist.`);
+            }
+        }
+
+        function connectToWebSocket() {
+            // Replace with your WebSocket server's address (e.g., localhost:8080)
+            const wsAddress = 'ws://localhost:8080/'; 
+            ws = new WebSocket(wsAddress);
+
+            ws.onopen = () => {
+                console.log('Connected to WebSocket server');
+            };
+
+            ws.onmessage = (event) => {
+                const message = JSON.parse(event.data);
+                if (message.command === 'open_chest') {
+                    const index = parseInt(message.chestIndex);
+                    if (!isNaN(index)) {
+                        openChestByIndex(index);
+                    }
+                } else if (message.command === 'start_game') {
+                    startGame();
+                }
+            };
+
+            ws.onclose = () => {
+                console.log('Disconnected from WebSocket server. Reconnecting in 5 seconds...');
+                setTimeout(connectToWebSocket, 5000);
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        }
+        
+        // Start the game and connect to the WebSocket server on load
+        startNewGame();
+        connectToWebSocket();
+    </script>
+</body>
+</html>
